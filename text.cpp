@@ -18,7 +18,7 @@ const char* server = "database-1.cvibdhufjj7d.us-east-1.rds.amazonaws.com";
 const char* user = "admin";
 const char* password = "artiomsitikoff";
 const char* database = "database-1";
-const char* sqlQueryForTextAI = "SELECT * FROM texts";
+const char* sqlQueryForTextAI = "SELECT * FROM Writings";
 
 string getDB();
 
