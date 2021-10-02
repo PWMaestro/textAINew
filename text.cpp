@@ -24,8 +24,6 @@ string getDB();
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
-
     Cgicc form;
     string name;
 
@@ -42,7 +40,6 @@ string getDB(){
     MYSQL_ROW row;
 
     int qstate;
-
     string sumOfTexts = "";
 
     conn = mysql_init(NULL);
