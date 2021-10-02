@@ -14,10 +14,10 @@
 using namespace std;
 using namespace cgicc;
 
-const char* server = "eu-cdbr-west-01.cleardb.com";
-const char* user = "bf9a5ee7e63428";
-const char* password = "b74c4f1c";
-const char* database = "heroku_b26ccddac4641f9";
+const char* server = "database-1.cvibdhufjj7d.us-east-1.rds.amazonaws.com";
+const char* user = "admin";
+const char* password = "artiomsitikoff";
+const char* database = "database-1";
 const char* sqlQueryForTextAI = "SELECT * FROM texts";
 
 string getDB();
