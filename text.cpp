@@ -18,7 +18,7 @@ const char* server = "database-1.cvibdhufjj7d.us-east-1.rds.amazonaws.com";
 const char* user = "admin";
 const char* password = "artiomsitikoff";
 const char* database = "sys";
-const char* sqlQueryForTextAI = "SELECT * FROM Writings";
+const char* sqlQuery = "SELECT * FROM Writings";
 
 string getDB();
 
@@ -48,7 +48,7 @@ string getDB(){
         conn = mysql_real_connect(conn, server, user, password, database, 3306, NULL, 0);
     }
 
-    qstate = mysql_query(conn, sqlQueryForTextAI);
+    qstate = mysql_query(conn, sqlQuery);
 
     if (!qstate)
     {
