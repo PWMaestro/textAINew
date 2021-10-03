@@ -11,14 +11,11 @@
 #include <mysql.h>
 #include <mysql_connection.h>
 
-#include "sqlConf.h"
+#include "getDbContent.h"
 #include "antiPlagiarism.h"
 
 using namespace std;
 using namespace cgicc;
-
-
-string getDB();
 
 int main()
 {
@@ -37,7 +34,7 @@ int main()
     
     name = form("name");
     if (!name.empty()) {
-    	cout << antiPlagiarism(getDB(), name) << "\n";
+    	cout << antiPlagiarism(getDbContent(), name) << "\n";
     } else {
     	cout << "Text is not provided!\n";
     }	
@@ -47,41 +44,4 @@ int main()
     cout << "</html>\n";
 
     return 0;
-}
-
-string getDB(){
-    MYSQL* conn;
-    MYSQL_RES* res;
-    MYSQL_ROW row;
-
-    int qstate;
-    int num_fields = 0;
-
-    string sumOfTexts = "";
-
-    conn = mysql_init(NULL);
-
-    if (conn != NULL) {
-        conn = mysql_real_connect(conn, server, user, password, database, 3306, NULL, 0);
-    }
-
-    qstate = mysql_query(conn, sqlQuery);
-
-    if (!qstate)
-    {
-        res = mysql_store_result(conn);
-        row = mysql_fetch_row(res);
-        while (row)
-        {
-            sumOfTexts.append(" ");
-            sumOfTexts.append(row[1]);
-
-            row = mysql_fetch_row(res);
-        }
-    }
-
-    mysql_free_result(res);
-    mysql_close(conn);
-
-    return sumOfTexts;
 }
