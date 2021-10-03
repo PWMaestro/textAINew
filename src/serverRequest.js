@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   openButton.addEventListener("click",  function () {
+    let response = await fetch("http://18.216.205.170:8080/cgi-bin/text.cgi");
+    console.log(response + "\n");
     const request1 = new XMLHttpRequest();
     request1.open("GET", "http://18.216.205.170:8080/cgi-bin/text.cgi");
     request1.send();
