@@ -49,16 +49,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   openButton.addEventListener("click",  async function () {
-    let response = await fetch("http://18.216.205.170:8080/cgi-bin/text.cgi");
-    console.log(response + "\n");
-
-    if (response.ok) {
+    try {
+      let response = await fetch("http://18.216.205.170:8080/cgi-bin/text.cgi");
       let text = await response.text();
       console.log(text);
       textAreaInfoNode.innerHTML = text;
       textAreaInfoNode.disabled = true;
       textAreaInfoNode.style.color = 'black';
       openButton.disabled = true;
+    } catch (e) {
+      throw new Error(e.message);
     }
   })
 });
