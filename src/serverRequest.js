@@ -51,17 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
   openButton.addEventListener("click",  async function () {
     let response = await fetch("http://18.216.205.170:8080/cgi-bin/text.cgi");
     console.log(response + "\n");
-    
-    const request1 = new XMLHttpRequest();
-    request1.open("GET", "http://18.216.205.170:8080/cgi-bin/text.cgi");
-    request1.send();
 
-    request1.onload = function () {
-      console.log(request1.responseText);
-      textAreaInfoNode.innerHTML = request1.responseText;
+    if (response.ok) {
+      let text = await response.text();
+      console.log(text);
+      textAreaInfoNode.innerHTML = text;
       textAreaInfoNode.disabled = true;
       textAreaInfoNode.style.color = 'black';
       openButton.disabled = true;
-    };
+    }
   })
 });
