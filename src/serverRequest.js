@@ -1,66 +1,69 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const textAreaCheckNode = document.getElementById('value'); // textarea for send button
-  const textAreaInfoNode = document.getElementById("info") // textarea for open database
-  const sendButton = document.getElementById("send"); // button send
-  const openButton = document.getElementById("open") // button open
-  const WORDS_NUMBER = 2;
-  
-  const regexp = /[^(\d+(.\d+)?)]/g;
+document.addEventListener("DOMContentLoaded", () => {
 
-  textAreaCheckNode.addEventListener("keyup", (e) => {
-    let arrayWords = e.target.value.split(" ");
-    let counterWords = arrayWords.length;
+const checkTextArea = document.getElementById("value");
+const infoTextArea = document.getElementById("info");
+const sendButton = document.getElementById("send");
+const openButton = document.getElementById("open");
+const valueElement = document.getElementById("value");
 
-    if (arrayWords[WORDS_NUMBER] !== "") {
-      if (counterWords > WORDS_NUMBER) {
-        sendButton.disabled = false;
-        sendButton.title = "";
-      } else {
-        sendButton.disabled = true;
-        sendButton.title = "Enter at least 3 words!";
-      }
+const serverIp = "18.216.205.170";
+const regExp = /[^(\d+(.\d+)?)]/g;
+
+const EMPTY_STRING = "";
+const MIN_WORDS_COUNT = 2;
+const MAX_PERCENTAGE = 100;
+
+checkTextArea.addEventListener("keyup", (e) => {
+  const wordsArray = e.target.value.split(" ");
+  const wordsCounter = wordsArray.length;
+
+  if (wordsCounter > MIN_WORDS_COUNT) {
+    if (wordsArray[MIN_WORDS_COUNT] !== EMPTY_STRING) {
+      sendButton.disabled = false;
+      sendButton.title = EMPTY_STRING;
+    } else {
+      sendButton.disabled = true;
+      sendButton.title = "Enter at least 3 words!";
     }
 
-    if (counterWords > WORDS_NUMBER && e.code === "Enter") {
+    if (e.code === "Enter") {
       sendButton.disabled = false;
-      sendButton.title = "";
+      sendButton.title = EMPTY_STRING;
       sendButton.click();
     }
-  });
+  }
+});
 
-  sendButton.addEventListener("click", async function () {
-    const payload = "name=" + encodeURIComponent(document.getElementById("value").value);
-    try {
-      const response = await fetch(
-        "http://18.216.205.170:8080/cgi-bin/script.cgi",
-        {
-          method: 'POST',
-          headers: {'Content-Type': "application/x-www-form-urlencoded"},
-          body: payload
-        }
-      );
-      const text = await response.text();
-      const answerNumber = 100 - parseInt(text.replace(regexp, ""));
-      
-      console.log(answerNumber);
-      document.querySelector("#opacity").classList.add("opacity");
-      document.querySelector("#result").innerHTML = `${answerNumber}% unique`;
-    } catch (e) {
-      throw new Error(e.message);
-    }
-  });
+sendButton.addEventListener("click", async () => {
+  const payload = "name=" + encodeURIComponent(valueElement.value);
+  try {
+    const response = await fetch(`http://${serverIp}:8080/cgi-bin/script.cgi`, {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: payload
+    });
+    const text = await response.text();
 
-  openButton.addEventListener("click",  async function () {
-    try {
-      const response = await fetch("http://18.216.205.170:8080/cgi-bin/text.cgi");
-      const text = await response.text();
+    const answerNumber = MAX_PERCENTAGE - parseInt( text.replace(regExp, EMPTY_STRING) );
+    document.querySelector("#opacity").classList.add("opacity");
+    document.querySelector("#result").innerHTML = `${answerNumber}% unique`;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+});
 
-      textAreaInfoNode.innerHTML = text;
-      textAreaInfoNode.disabled = true;
-      textAreaInfoNode.style.color = 'black';
-      openButton.disabled = true;
-    } catch (e) {
-      throw new Error(e.message);
-    }
-  })
+openButton.addEventListener("click", async () => {
+  infoTextArea.innerText = EMPTY_STRING;
+  try {
+    const response = await fetch(`http://${serverIp}:8080/cgi-bin/text.cgi`);
+    const text = await response.text();
+    
+    infoTextArea.innerHTML = text;
+    infoTextArea.disabled = true;
+    infoTextArea.style.color = 'black';
+  } catch (e) {
+    throw new Error(e.message);
+  }
+});
+
 });
