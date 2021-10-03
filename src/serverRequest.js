@@ -4,7 +4,6 @@ const checkTextArea = document.getElementById("value");
 const infoTextArea = document.getElementById("info");
 const sendButton = document.getElementById("send");
 const openButton = document.getElementById("open");
-const valueElement = document.getElementById("value");
 
 const serverIp = "18.216.205.170";
 const regExp = /[^(\d+(.\d+)?)]/g;
@@ -35,7 +34,7 @@ checkTextArea.addEventListener("keyup", (e) => {
 });
 
 sendButton.addEventListener("click", async () => {
-  const payload = "name=" + encodeURIComponent(valueElement.value);
+  const payload = "name=" + encodeURIComponent(checkTextArea.value);
   try {
     const response = await fetch(`http://${serverIp}:8080/cgi-bin/script.cgi`, {
         method: "POST",

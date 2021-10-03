@@ -19,8 +19,6 @@ using namespace cgicc;
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
-
     Cgicc form;
     string name;
 
