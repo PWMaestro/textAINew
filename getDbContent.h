@@ -7,6 +7,8 @@
 
 #include "sqlConf.h"
 
+using namespace std;
+
 string getDbContent();
 
 string getDbContent()
