@@ -22,7 +22,6 @@ COPY Makefile /var/www/cgi-bin/
 COPY script.cpp /var/www/cgi-bin/
 COPY text.cpp /var/www/cgi-bin/
 COPY sqlConf.h /var/www/cgi-bin/
-COPY db.txt /var/www/cgi-bin/
 
 WORKDIR /var/www/cgi-bin
 RUN make
