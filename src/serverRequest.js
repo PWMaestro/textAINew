@@ -28,31 +28,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  sendButton.addEventListener("click", function () {
-    let payload =
-        "name=" + encodeURIComponent(document.getElementById("value").value);
-        const request = new XMLHttpRequest();
-    request.open("POST", "http://18.216.205.170:8080/cgi-bin/script.cgi", true);
-
-    request.addEventListener("readystatechange", function () {
-      const answerNumber = 100 - parseInt(request.responseText.replace(regexp, ""));
+  sendButton.addEventListener("click", async function () {
+    const payload = "name=" + encodeURIComponent(document.getElementById("value").value);
+    try {
+      const response = await fetch(
+        "http://18.216.205.170:8080/cgi-bin/script.cgi",
+        {
+          method: 'POST',
+          headers: {'Content-Type': "application/x-www-form-urlencoded"},
+          body: payload
+        }
+      );
+      const text = await response.text();
+      const answerNumber = 100 - parseInt(text.replace(regexp, ""));
+      
       console.log(answerNumber);
       document.querySelector("#opacity").classList.add("opacity");
       document.querySelector("#result").innerHTML = `${answerNumber}% unique`;
-    });
-
-    request.setRequestHeader(
-        "Content-Type",
-        "application/x-www-form-urlencoded"
-    );
-    request.send(payload);
+    } catch (e) {
+      throw new Error(e.message);
+    }
   });
 
   openButton.addEventListener("click",  async function () {
     try {
-      let response = await fetch("http://18.216.205.170:8080/cgi-bin/text.cgi");
-      let text = await response.text();
-      console.log(text);
+      const response = await fetch("http://18.216.205.170:8080/cgi-bin/text.cgi");
+      const text = await response.text();
+
       textAreaInfoNode.innerHTML = text;
       textAreaInfoNode.disabled = true;
       textAreaInfoNode.style.color = 'black';
