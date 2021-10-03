@@ -22,7 +22,7 @@ using namespace std;
 
 const string EXCLUSIONS[] = { "чтд", "либо", "или", "что", "чтобы", "как", "нибудь", "только", "зато", "также", "когда", "чем"};
 
-/*double getShinglesMatchingsPersentage(const string &text, const string parsedFragment[], const int &wordsCount);
+double getShinglesMatchingsPersentage(const string &text, const string parsedFragment[], const int &wordsCount);
 double antiPlagiarism(string text, string fragment);
 string getSubstring(const string &originString, const int &startPosition, const int &length);
 
@@ -47,7 +47,7 @@ bool isExclusion(const string &word);
 bool isRepeated(const string &word, const string shingle[], const int &currentWordPointer);
 bool isNumber(const string &string, const int &length);
 bool isSeparator(char symbol);
-bool isNumeral(char symbol);*/
+bool isNumeral(char symbol);
 
 double antiPlagiarism(string text, string fragment)
 {
