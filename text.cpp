@@ -11,14 +11,12 @@
 #include <mysql.h>
 #include <mysql_connection.h>
 
+#include "sqlConf.h"
+
 using namespace std;
 using namespace cgicc;
 
-const char* server = "database-1.cvibdhufjj7d.us-east-1.rds.amazonaws.com";
-const char* user = "admin";
-const char* password = "artiomsitikoff";
-const char* database = "sys";
-const char* sqlQuery = "SELECT * FROM Writings";
+
 
 string getDB();
 
