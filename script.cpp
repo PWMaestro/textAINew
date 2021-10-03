@@ -109,7 +109,7 @@ string getDB(){
         conn = mysql_real_connect(conn, server, user, password, database, 3306, NULL, 0);
     }
 
-    qstate = mysql_query(conn, sqlQueryForTextAI);
+    qstate = mysql_query(conn, sqlQuery);
 
     if (!qstate)
     {
