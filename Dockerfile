@@ -23,12 +23,13 @@ COPY script.cpp /var/www/cgi-bin/
 COPY text.cpp /var/www/cgi-bin/
 COPY getdb.cpp /var/www/cgi-bin/
 COPY getdb.h /var/www/cgi-bin/
-COPY antiPlagiarism.h /var/www/cgi-bin/
+COPY plagiarism.cpp /var/www/cgi-bin/
+COPY plagiarism.h /var/www/cgi-bin/
 
 WORKDIR /var/www/cgi-bin
 RUN make
 RUN chmod 755 script.cgi
 RUN chmod 755 text.cgi
-RUN rm Makefile script.cpp text.cpp getdb.cpp
+RUN rm Makefile script.cpp text.cpp getdb.cpp plagiarism.cpp
 CMD apache2ctl -D FOREGROUND
 VOLUME ["/var/lock/"]

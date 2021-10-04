@@ -12,7 +12,7 @@
 #include <mysql_connection.h>
 
 #include "getdb.h"
-#include "antiPlagiarism.h"
+#include "plagiarism.h"
 
 using namespace std;
 using namespace cgicc;
