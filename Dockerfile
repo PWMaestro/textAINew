@@ -21,14 +21,14 @@ RUN mkdir /var/www/cgi-bin/
 COPY Makefile /var/www/cgi-bin/
 COPY script.cpp /var/www/cgi-bin/
 COPY text.cpp /var/www/cgi-bin/
-COPY sqlConf.h /var/www/cgi-bin/
-COPY getDbContent.h /var/www/cgi-bin/
+COPY getdb.cpp /var/www/cgi-bin/
+COPY getdb.h /var/www/cgi-bin/
 COPY antiPlagiarism.h /var/www/cgi-bin/
 
 WORKDIR /var/www/cgi-bin
 RUN make
 RUN chmod 755 script.cgi
 RUN chmod 755 text.cgi
-RUN rm Makefile script.cpp
+RUN rm Makefile script.cpp text.cpp getdb.cpp
 CMD apache2ctl -D FOREGROUND
 VOLUME ["/var/lock/"]
