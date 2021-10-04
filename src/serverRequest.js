@@ -9,27 +9,25 @@ const serverIp = "18.216.205.170";
 const regExp = /[^(\d+(.\d+)?)]/g;
 
 const EMPTY_STRING = "";
-const MIN_WORDS_COUNT = 2;
+const MIN_WORDS_COUNT = 3;
 const MAX_PERCENTAGE = 100;
 
 checkTextArea.addEventListener("keyup", (e) => {
-  const wordsArray = e.target.value.split(" ");
+  const wordsArray = e.target.value.split(" ").filter( str => str.length > 0 );
   const wordsCounter = wordsArray.length;
 
-  if (wordsCounter > MIN_WORDS_COUNT) {
-    if (wordsArray[MIN_WORDS_COUNT] !== EMPTY_STRING) {
-      sendButton.disabled = false;
-      sendButton.title = EMPTY_STRING;
-    } else {
-      sendButton.disabled = true;
-      sendButton.title = "Enter at least 3 words!";
-    }
-
+  if (wordsCounter >= MIN_WORDS_COUNT) {
+    sendButton.disabled = false;
+    sendButton.title = EMPTY_STRING;
+    
     if (e.code === "Enter") {
       sendButton.disabled = false;
       sendButton.title = EMPTY_STRING;
       sendButton.click();
     }
+  } else {
+    sendButton.disabled = true;
+    sendButton.title = "Enter at least 3 words!";
   }
 });
 
