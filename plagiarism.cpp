@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "plagiarism.h"
+
 using namespace std;
 
 #define EMPTY_STRING ""
