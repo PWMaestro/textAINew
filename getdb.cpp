@@ -4,6 +4,8 @@ const char password[] = "artiomsitikoff";
 const char database[] = "sys";
 const char sqlQuery[] = "SELECT * FROM Writings";
 
+using namespace std;
+
 string getDb()
 {
     MYSQL* conn;
