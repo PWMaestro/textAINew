@@ -11,7 +11,7 @@
 #include <mysql.h>
 #include <mysql_connection.h>
 
-#include "getDbContent.h"
+#include "getDb.h"
 #include "antiPlagiarism.h"
 
 using namespace std;
@@ -32,7 +32,7 @@ int main()
     
     name = form("name");
     if (!name.empty()) {
-    	cout << antiPlagiarism(getDbContent(), name) << "\n";
+    	cout << antiPlagiarism(getDb(), name) << "\n";
     } else {
     	cout << "Text is not provided!\n";
     }	

@@ -11,7 +11,8 @@
 #include <mysql.h>
 #include <mysql_connection.h>
 
-#include "getDbContent.h"
+#include "getDb.h"
+#include "antiPlagiarism.h"
 
 using namespace std;
 using namespace cgicc;
@@ -22,7 +23,7 @@ int main()
     string name;
 
     cout << "Content-type:text/html\r\n\r\n";
-    cout << getDbContent() << "\n";
+    cout << getDb() << "\n";
     
     return 0;
 }

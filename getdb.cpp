@@ -1,17 +1,10 @@
-#pragma once
+const char server[] = "database-1.cvibdhufjj7d.us-east-1.rds.amazonaws.com";
+const char user[] = "admin";
+const char password[] = "artiomsitikoff";
+const char database[] = "sys";
+const char sqlQuery[] = "SELECT * FROM Writings";
 
-#include <string>
-#include <boost/variant.hpp>
-#include <mysql.h>
-#include <mysql_connection.h>
-
-#include "sqlConf.h"
-
-using namespace std;
-
-string getDbContent();
-
-string getDbContent()
+string getDb()
 {
     MYSQL* conn;
     MYSQL_RES* res;
