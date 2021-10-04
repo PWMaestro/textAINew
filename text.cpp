@@ -11,7 +11,7 @@
 #include <mysql.h>
 #include <mysql_connection.h>
 
-#include "getDb.h"
+#include "getdb.h"
 #include "antiPlagiarism.h"
 
 using namespace std;
