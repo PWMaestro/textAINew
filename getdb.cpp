@@ -1,3 +1,5 @@
+#include <string>
+
 using namespace std;
 
 const char server[] = "database-1.cvibdhufjj7d.us-east-1.rds.amazonaws.com";
