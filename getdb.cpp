@@ -1,5 +1,9 @@
 #include <string>
 
+#include <boost/variant.hpp>
+#include <mysql.h>
+#include <mysql_connection.h>
+
 using namespace std;
 
 const char server[] = "database-1.cvibdhufjj7d.us-east-1.rds.amazonaws.com";
