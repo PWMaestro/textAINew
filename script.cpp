@@ -16,6 +16,8 @@
 using namespace std;
 using namespace cgicc;
 
+double antiPlagiarism(string text, string fragment);
+
 int main()
 {
     Cgicc form;
