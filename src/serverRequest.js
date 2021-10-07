@@ -12,6 +12,8 @@ const EMPTY_STRING = "";
 const MIN_WORDS_COUNT = 3;
 const MAX_PERCENTAGE = 100;
 
+infoTextArea.disabled = true;
+
 checkTextArea.addEventListener("keyup", (e) => {
   const wordsArray = e.target.value.split(" ").filter( str => str.length > 0 );
   const wordsCounter = wordsArray.length;
@@ -56,7 +58,6 @@ openButton.addEventListener("click", async () => {
     const text = await response.text();
     
     infoTextArea.innerHTML = text;
-    infoTextArea.disabled = true;
     infoTextArea.style.color = 'black';
   } catch (e) {
     throw new Error(e.message);
