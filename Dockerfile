@@ -24,7 +24,6 @@ COPY text.cpp /var/www/cgi-bin/
 COPY getdb.cpp /var/www/cgi-bin/
 COPY getdb.h /var/www/cgi-bin/
 COPY plagiarism.cpp /var/www/cgi-bin/
-COPY plagiarism.h /var/www/cgi-bin/
 
 WORKDIR /var/www/cgi-bin
 RUN make
