@@ -80,7 +80,7 @@ double getShinglesMatchingsPersentage(const string &text, const string parsedFra
         {
             continue;
         }
-        toLowerCase(word, length);
+        //toLowerCase(word, length);
         //replaceEngLetters(word, length);
         //replaceUppercaseLetters(word, length);
         if (isExclusion(word) || isRepeated(word, shingle, wordPointer))
