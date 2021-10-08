@@ -14,9 +14,9 @@ using namespace std;
 #define LENGTH_MAX_FRAGMENT 256
 #define SEPARATORS "./,+-#:`~@;$%^&*№([{< >}])=|!?–\'\"\n"
 #define ENG_LETTERS "AaBCcEeHKkMOoPpTXx"
-#define RUS_LETTERS "\u0410\u0430\u0412\u0421\u0441\u0415\u0435\u041d\u041a\u043a\u041c\u041e\u043e\u0420\u0440\u0422\u0425\u0445"
-#define RUS_LETTERS_LOWER_CASE "\u0430\u0431\u0432\u0433\u0434\u0435\u0451\u0436\u0437\u0438\u0439\u043a\u043b\u043c\u043d\u043e\u043f\u0440\u0441\u0442\u0443\u0444\u0445\u0446\u0448\u0449\u044a\u044b\u044c\u044d\u044e\u044f"
-#define RUS_LETTERS_UPPER_CASE "\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041a\u041b\u041c\u041d\u041e\u041f\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0428\u0429\u042a\u042b\u042c\u042d\u042e\u042f"
+// #define RUS_LETTERS "\u0410\u0430\u0412\u0421\u0441\u0415\u0435\u041d\u041a\u043a\u041c\u041e\u043e\u0420\u0440\u0422\u0425\u0445"
+// #define RUS_LETTERS_LOWER_CASE "\u0430\u0431\u0432\u0433\u0434\u0435\u0451\u0436\u0437\u0438\u0439\u043a\u043b\u043c\u043d\u043e\u043f\u0440\u0441\u0442\u0443\u0444\u0445\u0446\u0448\u0449\u044a\u044b\u044c\u044d\u044e\u044f"
+// #define RUS_LETTERS_UPPER_CASE "\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041a\u041b\u041c\u041d\u041e\u041f\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0428\u0429\u042a\u042b\u042c\u042d\u042e\u042f"
 
 const string EXCLUSIONS[] = { "чтд", "либо", "или", "что", "чтобы", "как", "нибудь", "только", "зато", "также", "когда", "чем"};
 
@@ -30,10 +30,11 @@ int getStringLength(const string &originString);
 int getWordsCounter(const string wordsArr[]);
 int compareStrings(const string &str1, const string &str2);
 
-void replaceUppercaseLetters(string &word, const int &length);
+//void replaceUppercaseLetters(string &word, const int &length);
 void writeWordInShingle(string shingle[], int &wordPointer, const string &word, const int &length);
-void replaceEngLetters(string &word, const int &length);
+//void replaceEngLetters(string &word, const int &length);
 void replaceLetter(string &word, const int &length, const char oldLetter, const char newLetter);
+void toLowerCase(string &string);
 void shiftQueue(string queue[], const int &queueLength, const string &newElement);
 void findWord(string &str, const string &text, int &startPosition, const int &length);
 void parseFragment(const string &fragment, string outputArr[]);
@@ -44,6 +45,7 @@ bool isEmptyWord(const string &word);
 bool isExclusion(const string &word);
 bool isRepeated(const string &word, const string shingle[], const int &currentWordPointer);
 bool isNumber(const string &string, const int &length);
+bool isLowercaseLetter(char symbol);
 bool isSeparator(char symbol);
 bool isNumeral(char symbol);
 
@@ -78,8 +80,8 @@ double getShinglesMatchingsPersentage(const string &text, const string parsedFra
         {
             continue;
         }
-        replaceEngLetters(word, length);
-        replaceUppercaseLetters(word, length);
+        //replaceEngLetters(word, length);
+        //replaceUppercaseLetters(word, length);
         if (isExclusion(word) || isRepeated(word, shingle, wordPointer))
         {
             continue;
@@ -153,13 +155,13 @@ int compareStrings(const string &string1, const string &string2)
     return 0;
 }
 
-void replaceUppercaseLetters(string &word, const int &length)
-{
-    for (int i = 0; RUS_LETTERS_UPPER_CASE[i] != '\0'; i++)
-    {
-        replaceLetter(word, length, RUS_LETTERS_UPPER_CASE[i], RUS_LETTERS_LOWER_CASE[i]);
-    }
-}
+// void replaceUppercaseLetters(string &word, const int &length)
+// {
+//     for (int i = 0; RUS_LETTERS_UPPER_CASE[i] != '\0'; i++)
+//     {
+//         replaceLetter(word, length, RUS_LETTERS_UPPER_CASE[i], RUS_LETTERS_LOWER_CASE[i]);
+//     }
+// }
 
 void writeWordInShingle(string shingle[], int &wordPointer, const string &word, const int &length)
 {
@@ -173,11 +175,22 @@ void writeWordInShingle(string shingle[], int &wordPointer, const string &word, 
     }
 }
 
-void replaceEngLetters(string &word, const int &length)
+// void replaceEngLetters(string &word, const int &length)
+// {
+//     for (int i = 0; ENG_LETTERS[i] != '\0'; i++)
+//     {
+//         replaceLetter(word, length, ENG_LETTERS[i], RUS_LETTERS[i]);
+//     }
+// }
+
+void toLowerCase(string &string)
 {
-    for (int i = 0; ENG_LETTERS[i] != '\0'; i++)
+    for (int i = 0; i < string.length; i++)
     {
-        replaceLetter(word, length, ENG_LETTERS[i], RUS_LETTERS[i]);
+        if (!isLowercaseLetter(string[i]))
+        {
+            string[i] = char(string[i] - 32);
+        }
     }
 }
 
@@ -246,8 +259,8 @@ void parseFragment(const string &fragment, string outputArr[])
         {
             continue;
         }
-        replaceEngLetters(word, length);
-        replaceUppercaseLetters(word, length);
+        //replaceEngLetters(word, length);
+        //replaceUppercaseLetters(word, length);
         if (isExclusion(word))
         {
             continue;
@@ -317,6 +330,11 @@ bool isNumber(const string &string, const int &length)
         }
     }
     return true;
+}
+
+bool isLowercaseLetter(char symbol)
+{
+    return symbol >= 'a' && symbol <= 'z';
 }
 
 bool isSeparator(char symbol)
