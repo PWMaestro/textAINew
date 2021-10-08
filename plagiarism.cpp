@@ -34,7 +34,7 @@ int compareStrings(const string &str1, const string &str2);
 void writeWordInShingle(string shingle[], int &wordPointer, const string &word, const int &length);
 //void replaceEngLetters(string &word, const int &length);
 void replaceLetter(string &word, const int &length, const char oldLetter, const char newLetter);
-void toLowerCase(string &string);
+void toLowerCase(string &string, const int &length);
 void shiftQueue(string queue[], const int &queueLength, const string &newElement);
 void findWord(string &str, const string &text, int &startPosition, const int &length);
 void parseFragment(const string &fragment, string outputArr[]);
@@ -80,6 +80,7 @@ double getShinglesMatchingsPersentage(const string &text, const string parsedFra
         {
             continue;
         }
+        toLowerCase(word, length);
         //replaceEngLetters(word, length);
         //replaceUppercaseLetters(word, length);
         if (isExclusion(word) || isRepeated(word, shingle, wordPointer))
@@ -183,9 +184,9 @@ void writeWordInShingle(string shingle[], int &wordPointer, const string &word, 
 //     }
 // }
 
-void toLowerCase(string &string)
+void toLowerCase(string &string, const int &length)
 {
-    for (int i = 0; i < string.length; i++)
+    for (int i = 0; i < length; i++)
     {
         if (!isLowercaseLetter(string[i]))
         {
