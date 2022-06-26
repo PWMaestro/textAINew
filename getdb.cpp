@@ -10,7 +10,7 @@ const char server[] = "websql";
 const char user[] = "root";
 const char password[] = "root";
 const char database[] = "Library";
-const char sqlQuery[] = "SELECT Id, Content FROM EDocs WHERE type IN (2, 3);";
+const char sqlQuery[] = "SELECT Id, Content FROM EDocs WHERE TypeId IN (2, 3);";
 
 string getDb()
 {
