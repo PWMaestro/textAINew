@@ -5,7 +5,7 @@ const infoTextArea = document.getElementById("info");
 const sendButton = document.getElementById("send");
 const openButton = document.getElementById("open");
 
-const serverIp = "18.218.69.65";
+const serverIp = "94.158.219.173";
 const regExp = /[^(\d+(.\d+)?)]/g;
 
 const EMPTY_STRING = "";
