@@ -8,7 +8,7 @@ using namespace std;
 
 const char server[] = "websql";
 const char user[] = "root";
-const char password[] = "root";
+const char password[] = "cuTTer19";
 const char database[] = "Library";
 const char sqlQuery[] = "SELECT Id, Content FROM EDocs WHERE TypeId IN (2, 3);";
 
